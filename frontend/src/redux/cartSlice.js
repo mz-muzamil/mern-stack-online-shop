@@ -22,7 +22,9 @@ const cartSlice = createSlice({
           total_price: action.payload.price,
         });
       }
-      state.totalAmount = parseFloat((state.totalAmount + action.payload.price).toFixed(2));;
+      state.totalAmount = parseFloat(
+        (state.totalAmount + action.payload.price).toFixed(2)
+      );
       state.totalItems += 1;
     },
     removeItem: (state, action) => {
@@ -30,11 +32,29 @@ const cartSlice = createSlice({
         (item) => item.id === action.payload.id
       );
       if (itemToRemove) {
-        state.totalAmount = parseFloat((state.totalAmount - itemToRemove.price * itemToRemove.quantity).toFixed(2));
+        state.totalAmount = parseFloat(
+          (
+            state.totalAmount -
+            itemToRemove.price * itemToRemove.quantity
+          ).toFixed(2)
+        );
         state.totalItems -= itemToRemove.quantity;
         state.items = state.items.filter(
           (item) => item.id !== action.payload.id
         );
+      }
+    },
+    adjustQuantity: (state, action) => {
+      const item = state.items.find((item) => item.id === action.payload.id);
+      if (item) {
+        const qtyDif = action.payload.quantity - item.quantity;
+        item.quantity = action.payload.quantity;
+        item.total_price = item.quantity * item.price;
+
+        state.totalAmount = parseFloat(
+          (state.totalAmount + qtyDif * item.price).toFixed(2)
+        );
+        state.totalItems += qtyDif;
       }
     },
     clearCart: (state) => {
@@ -45,6 +65,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addTocart, removeItem, clearCart } = cartSlice.actions;
+export const { addTocart, removeItem, clearCart, adjustQuantity } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

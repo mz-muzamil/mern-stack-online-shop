@@ -2,7 +2,7 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, removeItem } from "../redux/cartSlice";
+import { clearCart, removeItem, adjustQuantity } from "../redux/cartSlice";
 import { Link } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
@@ -19,6 +19,18 @@ const Cart = () => {
   };
   const handleRemoveCartItem = (item) => {
     dispatch(removeItem(item));
+  };
+
+  const handleIncrease = (item) => {
+    dispatch(adjustQuantity({ id: item.id, quantity: item.quantity + 1 }));
+  };
+
+  const handleDecrease = (item) => {
+    if (item.quantity >= 1) {
+      dispatch(adjustQuantity({ id: item.id, quantity: item.quantity - 1 }));
+    } else {
+      dispatch(removeItem({ id: item.id }));
+    }
   };
 
   const paymentCheckout = async () => {
@@ -120,7 +132,10 @@ const Cart = () => {
                                   className="text-center"
                                   style={{ verticalAlign: "middle" }}
                                 >
-                                  <div className="qty-control position-relative">
+                                  <div
+                                    className="qty-control position-relative me-auto"
+                                    style={{ width: 150 }}
+                                  >
                                     <input
                                       type="number"
                                       name="quantity"
@@ -128,10 +143,22 @@ const Cart = () => {
                                       value={singleCartItem.quantity}
                                       min="1"
                                       className="qty-control-number roboto-medium text-center"
-                                      readonly=""
+                                      readOnly=""
                                     />
-                                    <div className="qty-control-reduce">-</div>
-                                    <div className="qty-control-increase">
+                                    <div
+                                      className="qty-control-reduce"
+                                      onClick={() =>
+                                        handleDecrease(singleCartItem)
+                                      }
+                                    >
+                                      -
+                                    </div>
+                                    <div
+                                      className="qty-control-increase"
+                                      onClick={() =>
+                                        handleIncrease(singleCartItem)
+                                      }
+                                    >
                                       +
                                     </div>
                                   </div>

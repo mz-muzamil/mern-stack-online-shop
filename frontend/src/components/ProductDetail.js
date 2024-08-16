@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTocart } from "../redux/cartSlice";
+import { addTocart, adjustQuantity, removeItem } from "../redux/cartSlice";
 import { ToastContainer, toast } from "react-toastify";
 import { Col, Container, Row } from "react-bootstrap";
 import Skeleton from "react-loading-skeleton";
@@ -21,6 +21,18 @@ const ProductDetail = () => {
   const handleAddToCart = (item) => {
     dispatch(addTocart(item));
     notify();
+  };
+
+  const handleIncrease = (item) => {
+    dispatch(adjustQuantity({ id: item.id, quantity: item.quantity + 1 }));
+  };
+
+  const handleDecrease = (item) => {
+    if (item.quantity > 1) {
+      dispatch(adjustQuantity({ id: item.id, quantity: item.quantity - 1 }));
+    } else {
+      dispatch(removeItem({ id: item.id }));
+    }
   };
 
   useEffect(() => {
@@ -78,20 +90,6 @@ const ProductDetail = () => {
                     <h3>{product.title}</h3>
                     <Card.Text>{product.description}</Card.Text>
                     <div className="d-flex justify-content-between align-items-center gap-3">
-                      <span>Quantity</span>
-                      <div className="qty-control position-relative">
-                        <input
-                          type="number"
-                          name="quantity"
-                          id="quantity1"
-                          value="1"
-                          min="1"
-                          className="qty-control-number roboto-medium text-center"
-                          readonly=""
-                        />
-                        <div className="qty-control-reduce">-</div>
-                        <div className="qty-control-increase">+</div>
-                      </div>
                       <Button
                         variant="primary"
                         onClick={() => handleAddToCart(product)}
