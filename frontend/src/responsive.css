@@ -1,0 +1,117 @@
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .container {
+    max-width: 100%;
+  }
+  .banner {
+    min-height: 300px;
+  }
+  #header {
+    display: none;
+  }
+  .header.sticky.v2 {
+    display: flex !important;
+  }
+  .section-heading figure {
+    font-size: 60px;
+    line-height: 60px;
+  }
+  .section-heading .text,
+  .section-heading .text.offset {
+    top: 13px;
+    left: 60px;
+    font-size: 22px;
+  }
+  .section-heading .text.offset {
+    left: 67px;
+  }
+  .desciption-text {
+    padding-left: 0;
+  }
+  .carousel {
+    min-height: 550px;
+  }
+  .section-tabs .tab-content {
+    padding: 50px 0;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .container {
+    max-width: 100%;
+  }
+  .banner {
+    min-height: 300px;
+  }
+  #header {
+    display: none;
+  }
+  .header.sticky.v2 {
+    display: flex !important;
+  }
+  .section-heading figure {
+    font-size: 60px;
+    line-height: 60px;
+  }
+  .section-heading .text,
+  .section-heading .text.offset {
+    top: 13px;
+    left: 60px;
+    font-size: 22px;
+  }
+  .section-heading .text.offset {
+    left: 67px;
+  }
+  .desciption-text {
+    padding-left: 0;
+  }
+  .carousel {
+    min-height: 550px;
+  }
+  .section-tabs .tab-content {
+    padding: 50px 0;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .container {
+    max-width: 100%;
+  }
+  .banner {
+    min-height: 300px;
+  }
+  #header {
+    display: none;
+  }
+  .header.sticky.v2 {
+    display: flex !important;
+  }
+  .section-heading figure {
+    font-size: 60px;
+    line-height: 60px;
+  }
+  .section-heading .text,
+  .section-heading .text.offset {
+    top: 13px;
+    left: 60px;
+    font-size: 22px;
+  }
+  .section-heading .text.offset {
+    left: 67px;
+  }
+  .desciption-text {
+    padding-left: 0;
+  }
+  .carousel {
+    min-height: 710px;
+  }
+  .section-tabs .tab-content {
+    padding: 50px 0;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 576px) {
+  .banner {
+    min-height: 250px;
+  }
+  .footer,
+  .footer .copyright {
+    text-align: center !important;
+  }
+}
