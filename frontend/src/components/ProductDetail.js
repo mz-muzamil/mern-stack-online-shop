@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTocart, adjustQuantity, removeItem } from "../redux/cartSlice";
+import { addTocart } from "../redux/cartSlice";
 import { ToastContainer, toast } from "react-toastify";
 import { Col, Container, Row } from "react-bootstrap";
 import Skeleton from "react-loading-skeleton";
@@ -21,18 +21,6 @@ const ProductDetail = () => {
   const handleAddToCart = (item) => {
     dispatch(addTocart(item));
     notify();
-  };
-
-  const handleIncrease = (item) => {
-    dispatch(adjustQuantity({ id: item.id, quantity: item.quantity + 1 }));
-  };
-
-  const handleDecrease = (item) => {
-    if (item.quantity > 1) {
-      dispatch(adjustQuantity({ id: item.id, quantity: item.quantity - 1 }));
-    } else {
-      dispatch(removeItem({ id: item.id }));
-    }
   };
 
   useEffect(() => {
